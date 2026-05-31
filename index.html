@@ -225,7 +225,52 @@ width:6px;
 background:rgba(255,255,255,.14);
 border-radius:999px;
 }
+.memento-checkout-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:16px;
+}
 
+.memento-checkout-form input,
+.memento-checkout-form textarea{
+  width:100%;
+  min-height:44px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.04);
+  color:#fff;
+  padding:0 14px;
+  font-family:Inter,Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:.08em;
+  outline:none;
+}
+
+.memento-checkout-form textarea{
+  grid-column:1 / -1;
+  min-height:74px;
+  padding-top:14px;
+  resize:none;
+}
+
+.memento-checkout-form input::placeholder,
+.memento-checkout-form textarea::placeholder{
+  color:rgba(255,255,255,.42);
+  text-transform:uppercase;
+}
+
+#memento-mail-demo{
+  background:#FF7950!important;
+  color:#090909!important;
+  border-color:#FF7950!important;
+}
+
+@media(max-width:560px){
+  .memento-checkout-form{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 
 <script type="importmap">
@@ -1345,11 +1390,18 @@ body:not(.memento-ui-ready) [class*="loader" i] span{
             <div class="memento-flow-step"><strong>04</strong><b>Consegna</b><p>Qualità, garanzia e tracking dell’ordine.</p></div>
           </div>
         </section>
-        <div class="memento-actions">
-          <button class="memento-action primary" id="memento-print-pdf">Salva PDF</button>
-          <button class="memento-action" id="memento-download-json">Download dati</button>
-          <button class="memento-action" id="memento-mail-demo">Email demo</button>
-        </div>
+       <div class="memento-checkout-form">
+  <input id="memento-customer-name" placeholder="Nome cliente">
+  <input id="memento-customer-email" placeholder="Email cliente">
+  <input id="memento-customer-phone" placeholder="Telefono">
+  <textarea id="memento-customer-notes" placeholder="Note ordine"></textarea>
+</div>
+
+<div class="memento-actions">
+  <button class="memento-action primary" id="memento-mail-demo">Invia ordine</button>
+  <button class="memento-action" id="memento-print-pdf">Salva PDF</button>
+  <button class="memento-action" id="memento-download-json">Download dati</button>
+</div>
       </main>
     </div>
   </div>
@@ -2104,7 +2156,7 @@ function addCheckout(){
  b.id="memento-checkout-config";
 b.className="tool";
 b.type="button";
-b.textContent="CHECKOUT";
+b.textContent="CHECKOUT / ORDINA";
 b.style.display="flex";
 b.style.visibility="visible";
 b.style.opacity="1";
@@ -2124,11 +2176,20 @@ function events(){
 
   const d=lastOrderData||readConfig();
 
-  const customerName=prompt("Nome cliente:");
-  if(!customerName)return;
+  const customerName=document.getElementById("memento-customer-name")?.value.trim();
+const customerEmail=document.getElementById("memento-customer-email")?.value.trim();
+const customerPhone=document.getElementById("memento-customer-phone")?.value.trim();
+const customerNotes=document.getElementById("memento-customer-notes")?.value.trim();
 
-  const customerEmail=prompt("Email cliente:");
-  if(!customerEmail)return;
+if(!customerName){
+  alert("Inserisci il nome cliente.");
+  return;
+}
+
+if(!customerEmail){
+  alert("Inserisci l'email cliente.");
+  return;
+}
 
   try{
 
@@ -2143,12 +2204,14 @@ function events(){
         productName:d.product,
         orderId:d.id,
         configuration:{
-          product:d.product,
-          price:d.price,
-          date:d.date,
-          values:d.values,
-          activeValues:d.activeValues
-        }
+  product:d.product,
+  price:d.price,
+  date:d.date,
+  customerPhone:customerPhone,
+  customerNotes:customerNotes,
+  values:d.values,
+  activeValues:d.activeValues
+}
       })
     });
 
