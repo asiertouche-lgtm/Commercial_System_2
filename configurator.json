@@ -1,0 +1,103 @@
+{
+  "polo": {
+    "label": "Polo",
+    "model": "assets/models/polo/model.fbx",
+    "groups": {
+      "color": {
+        "label": "Color",
+        "aliases": [
+          "body",
+          "polo",
+          "shirt",
+          "material",
+          "fabric",
+          "cloth",
+          "default"
+        ],
+        "textures": [
+          "assets/textures/polo/black.webp",
+          "assets/textures/polo/dark_grey.webp",
+          "assets/textures/polo/grey.webp",
+          "assets/textures/polo/blood.webp",
+          "assets/textures/polo/midnight.webp",
+          "assets/textures/polo/olive.webp",
+          "assets/textures/polo/blue.webp",
+          "assets/textures/polo/brown.webp",
+          "assets/textures/polo/bordo.webp"
+        ]
+      }
+    }
+  },
+  "pants": {
+    "label": "Pants",
+    "model": "assets/models/pants/model.fbx",
+    "groups": {
+      "belt": {
+        "label": "Belt",
+        "aliases": [
+          "BELT_MAT",
+          "BELT",
+          "beltmat",
+          "belt"
+        ],
+        "textures": [
+          "assets/textures/pants/belt/belt_1.webp",
+          "assets/textures/pants/belt/belt_2.webp",
+          "assets/textures/pants/belt/belt_3.webp",
+          "assets/textures/pants/belt/belt_4.webp"
+        ]
+      },
+      "pockets": {
+        "label": "Pockets",
+        "aliases": [
+          "POCKETS_MAT",
+          "POCKETS",
+          "POCKET_MAT",
+          "pocketsmat",
+          "pockets",
+          "pocket"
+        ],
+        "textures": [
+          "assets/textures/pants/pockets/pockets_1.webp",
+          "assets/textures/pants/pockets/pockets_2.webp",
+          "assets/textures/pants/pockets/pockets_3.webp",
+          "assets/textures/pants/pockets/pockets_4.webp"
+        ]
+      },
+      "up_left": {
+        "label": "Up Left",
+        "aliases": [
+          "UP_LEFT_MAT",
+          "UP_LEFT",
+          "UPPER_LEFT_MAT",
+          "upleftmat",
+          "upleft",
+          "upperleft"
+        ],
+        "textures": [
+          "assets/textures/pants/up_left/up_left_1.webp",
+          "assets/textures/pants/up_left/up_left_2.webp",
+          "assets/textures/pants/up_left/up_left_3.webp",
+          "assets/textures/pants/up_left/up_left_4.webp"
+        ]
+      },
+      "up_right": {
+        "label": "Up Right",
+        "aliases": [
+          "UP_RIGHT_MAT",
+          "UP_RIGHT",
+          "UPPER_RIGHT_MAT",
+          "uprightmat",
+          "upright",
+          "upperright"
+        ],
+        "textures": [
+          "assets/textures/pants/up_right/up_right_1.webp",
+          "assets/textures/pants/up_right/up_right_2.webp",
+          "assets/textures/pants/up_right/up_right_3.webp",
+          "assets/textures/pants/up_right/up_right_4.webp"
+        ]
+      }
+    }
+  }
+}

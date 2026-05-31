@@ -1,0 +1,6 @@
+root index.html exists: True
+root assets exists: True
+root configurator.json exists: True
+package.json exists: True
+vercel.json exists: True
+large files >20MB: []

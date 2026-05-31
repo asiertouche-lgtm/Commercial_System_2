@@ -1,0 +1,1 @@
+Texture preview visibili + tasto FX integrato. Build: npm run build, Output: dist.
