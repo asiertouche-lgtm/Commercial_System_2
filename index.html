@@ -2099,9 +2099,16 @@ function close(){document.getElementById("memento-order-modal").classList.remove
 function addCheckout(){
  const toolbar=document.querySelector("#memento-toolbar-slot,.toolbar,.tools");
  if(!toolbar||document.getElementById("memento-checkout-config"))return;
- toolbar.style.gridTemplateColumns="repeat(6,minmax(0,1fr))";
+ toolbar.style.gridTemplateColumns="repeat(5,minmax(0,1fr))";
  const b=document.createElement("button");
- b.id="memento-checkout-config";b.className="tool";b.type="button";b.textContent="CHECKOUT";b.addEventListener("click",open);
+ b.id="memento-checkout-config";
+b.className="tool";
+b.type="button";
+b.textContent="CHECKOUT";
+b.style.display="flex";
+b.style.visibility="visible";
+b.style.opacity="1";
+b.addEventListener("click",open);
  toolbar.appendChild(b);
 }
 function events(){
