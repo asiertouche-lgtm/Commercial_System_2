@@ -2113,10 +2113,55 @@ function events(){
  document.getElementById("memento-download-json")?.addEventListener("click",()=>{
    const d=lastOrderData||readConfig();const blob=new Blob([JSON.stringify(d,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=d.id+"_memento_order.json";a.click();URL.revokeObjectURL(a.href);
  });
- document.getElementById("memento-mail-demo")?.addEventListener("click",()=>{
-   const d=lastOrderData||readConfig();window.location.href="mailto:?subject="+encodeURIComponent("Configurazione MEMENTO "+d.id)+"&body="+encodeURIComponent("Ordine: "+d.id+"\nProdotto: "+d.product+"\nPrezzo: "+d.price+"\n\n"+d.values.map(x=>x.label+": "+x.value).join("\n"));
- });
-}
+ document.getElementById("memento-mail-demo")?.addEventListener("click",async()=>{
+
+  const d=lastOrderData||readConfig();
+
+  const customerName=prompt("Nome cliente:");
+  if(!customerName)return;
+
+  const customerEmail=prompt("Email cliente:");
+  if(!customerEmail)return;
+
+  try{
+
+    const response=await fetch("/api/order",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        customerName:customerName,
+        customerEmail:customerEmail,
+        productName:d.product,
+        orderId:d.id,
+        configuration:{
+          product:d.product,
+          price:d.price,
+          date:d.date,
+          values:d.values,
+          activeValues:d.activeValues
+        }
+      })
+    });
+
+    const result=await response.json();
+
+    if(result.success){
+      alert("Configurazione inviata correttamente.");
+    }else{
+      alert("Errore: "+result.error);
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Errore durante l'invio.");
+
+  }
+
+});
 function init(){addCheckout();events()}
 window.addEventListener("DOMContentLoaded",init);window.addEventListener("load",init);setTimeout(init,700);setTimeout(init,1600);
 })();
